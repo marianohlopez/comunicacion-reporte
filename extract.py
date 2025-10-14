@@ -6,7 +6,7 @@ def extract_prest_sin_pa(cursor):
       CONCAT(p.alumno_apellido, ", ", p.alumno_nombre) AS alumno,
       DATE_FORMAT(p.prestacion_fec_pase_activo, '%d-%m-%Y') AS fec_activacion,
       DATE_FORMAT(COALESCE(MAX(asig.asignpa_pa_fec_baja), asig.asignpa_fec1), '%d-%m-%Y') AS ultima_fecha_sin_pa,
-      DATEDIFF(CURDATE(), COALESCE(MAX(asig.asignpa_pa_fec_baja), asig.asignpa_fec1)) AS dias_sin_pa,
+      DATEDIFF(CURDATE(), COALESCE(MAX(asig.asignpa_pa_fec_baja), p.prestacion_fec_pase_activo)) AS dias_sin_pa,
       a.alumno_diagnostico,
       p.prestacion_escuela_nivel AS nivel,
       p.prestacion_escuela_turno AS turno,
