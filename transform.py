@@ -13,7 +13,7 @@ MAIL_DESTINO = os.getenv("MAIL_DESTINO")
 
 today = datetime.now()
 
-def export_excel(data_prest):
+def export_excel(data_prest, data_prest_public):
     
   # Hoja 1 - Prestaciones activas sin PA
 
@@ -32,6 +32,20 @@ def export_excel(data_prest):
 
   for row in data_prest:
       ws.append(row)
+
+  # Segunda hoja (Prest. sin pa para publicar)
+  ws2 = wb.create_sheet(title="Prest. sin PA para publicar")
+
+  headers_public = ["PRESTACION ID", "NIVEL", "TURNO", "ESCUELA", "LOCALIDAD", "PARTIDO",
+                    "COORDINADORA", "MAIL COORDINADORA"]
+  
+  ws2.append(headers_public)
+
+  for cell in ws2[1]:
+    cell.font = Font(bold=True)
+
+  for row in data_prest_public:
+    ws2.append(row)
 
   nombre_archivo = f"reporte_comunicacion_{today.strftime('%Y-%m-%d')}.xlsx"
   wb.save(nombre_archivo)
