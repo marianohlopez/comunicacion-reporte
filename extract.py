@@ -1,11 +1,10 @@
 def extract_prest_sin_pa(cursor):
-
   query = """ 
     SELECT 
       p.prestacion_id,
       CONCAT(p.alumno_apellido, ", ", p.alumno_nombre) AS alumno,
       DATE_FORMAT(p.prestacion_fec_pase_activo, '%d-%m-%Y') AS fec_activacion,
-      DATE_FORMAT(COALESCE(MAX(asig.asignpa_pa_fec_baja), asig.asignpa_fec1), '%d-%m-%Y') AS ultima_fecha_sin_pa,
+      DATE_FORMAT(MAX(asig.asignpa_pa_fec_baja), '%d-%m-%Y') AS ultima_fecha_sin_pa,
       DATEDIFF(CURDATE(), COALESCE(MAX(asig.asignpa_pa_fec_baja), p.prestacion_fec_pase_activo)) AS dias_sin_pa,
       a.alumno_diagnostico,
       p.prestacion_escuela_nivel AS nivel,
@@ -35,6 +34,8 @@ def extract_prest_sin_pa(cursor):
       AND prestacion_alumno != 522
     GROUP BY 
       p.prestacion_id, p.prestacion_alumno
+    HAVING
+		  MAX(CASE WHEN asig.asignpa_fec1 > CURDATE() THEN 1 ELSE 0	END) = 0;
    """
   cursor.execute(query)
 
