@@ -22,8 +22,8 @@ def export_excel(data_prest, data_prest_public):
   ws.title = "Prestaciones activas sin PA"
 
   headers_resumen = ["PRESTACION ID", "ALUMNO", "FEC. ACTIVACION", "FEC. DE ULTIMA BAJA", "DIAS SIN PA", 
-                     "DIAGNOSTICO", "NIVEL", "TURNO", "COORDINADORA", "ESCUELA", "ESC. DIRECCION", 
-                     "ESC. MAIL", "ESC. TEL 1", "ESC. TEL 2", "ESC. LOCALIDAD", "ESC. PARTIDO"]
+                     "DIAGNOSTICO", "PERFIL REQUERIDO PROF.", "NIVEL", "TURNO", "COORDINADORA", "ESCUELA", 
+                     "ESC. DIRECCION", "ESC. MAIL", "ESC. TEL 1", "ESC. TEL 2", "ESC. LOCALIDAD", "ESC. PARTIDO"]
   
   ws.append(headers_resumen)
 
